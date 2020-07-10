@@ -23,10 +23,12 @@ function App() {
   const [avatar, setAvatar] = useState("");
   const loginWithFacebook = (data) => {
     console.log(data);
-    setUser(data.name);
-    setAvatar(data.picture.data.url);
-    localStorage.setItem("username", data.name);
-    localStorage.setItem("avatar", data.picture.data.url);
+    if (Object.keys(data).length > 1) {
+      setUser(data.name);
+      setAvatar(data.picture.data.url);
+      localStorage.setItem("username", data.name);
+      localStorage.setItem("avatar", data.picture.data.url);
+    }
   };
 
   useEffect(() => {
@@ -61,7 +63,7 @@ function App() {
         <Modal.Header closeButton></Modal.Header>
         <Modal.Body>
           <FacebookLogin
-            appId="2780444682185548"
+            appId="948422718930659"
             autoLoad={false}
             fields="name,email,picture"
             callback={loginWithFacebook}
